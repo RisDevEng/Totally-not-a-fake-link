@@ -290,16 +290,31 @@ async function tryPlay() {
       tuneTo(idx, true);
     });
 
-    nextBtn.addEventListener("click", () => {
-      if (currentIdx >= stations.length - 1) {
-        stopCurrent(true);
-        show("screen4");
-        return;
-      }
-      const idx = Math.min(stations.length - 1, currentIdx + 1);
-      range.value = idx;
-      tuneTo(idx, true);
-    });
+nextBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  // ✅ hard sync to what the dial says (single source of truth)
+  const dialIdx = parseInt(range.value, 10);
+  if (!Number.isNaN(dialIdx)) {
+    currentIdx = dialIdx;
+    currentAudio = stationAudio[currentIdx];
+    setNeedleByIndex(currentIdx); // optional but keeps visuals honest
+  }
+
+  const atLast = currentIdx >= stations.length - 1;
+
+  if (atLast) {
+    stopCurrent(true);
+    show("screen4");
+    return;
+  }
+
+  const idx = Math.min(stations.length - 1, currentIdx + 1);
+  range.value = String(idx);
+  tuneTo(idx, true);
+});
+
 
 playBtn.addEventListener("click", async (e) => {
   e.preventDefault();
