@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ Valentine – Full Interactive Experience</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- SCREEN 1 -->
+  <div class="screen" id="screen1">
+    <h1>Welcome to Nkalaa’s Valentine Station ❤️</h1>
+    <button id="startBtn">Play Valentine Show 🎶</button>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen" id="screen2">
+    <h2>Scratch the Vinyl to reveal a memory🎧❤️</h2>
+    <div class="vinyl" id="vinyl" role="button" tabindex="0" aria-label="Vinyl record"></div>
+    <div id="memoryPopup" aria-hidden="true">A cute memory appears here!</div>
+    <button id="memoryNextBtn">Next ➜</button>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen" id="screen3">
+    <div class="radioApp fullscreenRadio">
+      <div class="radioTop">
+        <div class="radioTitle">Radio</div>
+        <button class="radioChevron" type="button" aria-label="More">⌄</button>
+      </div>
+
+      <div class="stationName" id="stationName">Nkalaa Radio</div>
+
+      <div class="freqRow">
+        <div class="freqBig" id="freqBig">❤️ You mean so much to me</div>
+      </div>
+
+      <div class="bandRow" aria-label="Band">
+        <button class="bandBtn isActive" id="bandFM" type="button">FM</button>
+        <button class="bandBtn" id="bandAM" type="button">AM</button>
+      </div>
+
+      <div class="radioHelpCard" id="radioHelpCard">
+        <div class="radioHelpTitle" id="radioHelpTitle">songs that remind me of you ❤️</div>
+        <div class="radioHelpHints" id="radioHelpHints">
+          <span class="hintPill">Drag the dial 🎚️ to change tune</span>
+          <span class="hintPill">Tap ⏯ to play/pause</span>
+          <span class="hintPill" id="continueHint" style="display:none;">Tap ⏭ to continue 💖</span>
+        </div>
+      </div>
+
+      <p id="radioText" class="radioCaption"></p>
+
+      <!-- ✅ unified dial system -->
+      <div class="dialWrap">
+        <div class="dialStage" aria-hidden="true">
+          <div class="dialFaceClip">
+            <div class="dialTicks"></div>
+            <div class="dialTicks dialTicksSmall"></div>
+
+            <div class="needle" id="needle">
+              <div class="needleLine"></div>
+            </div>
+          </div>
+
+          <div class="dialKnob"></div>
+
+          <input id="tunerRange" type="range" min="0" max="3" step="1" value="0" aria-label="Tuner" />
+        </div>
+      </div>
+
+      <div class="playerRow" aria-label="Controls">
+        <button class="playerBtn" id="prevBtn" type="button" aria-label="Previous">⏮</button>
+        <button class="playerBtn playBtn" id="playBtn" type="button" aria-label="Play/Pause">⏯</button>
+        <button class="playerBtn" id="nextBtn" type="button" aria-label="Next">⏭</button>
+      </div>
+
+      <!-- ✅ Volume on the side (starts muted) -->
+      <div class="sideControls" aria-label="Volume">
+        <button class="volBtn" id="volBtn" type="button">🔇</button>
+        <div class="volWrap" id="volWrap">
+          <input id="volRange" type="range" min="0" max="1" step="0.01" value="0">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 -->
+  <div class="screen" id="screen4">
+    <canvas id="starfield"></canvas>
+    <div class="overlay">
+      <button id="valentinesButton">Continue 💖</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5 -->
+  <div class="screen" id="screen5">
+    <h1 class="proposalTitle">Bunny, will you be my Valentine? ❤️</h1>
+
+    <div class="proposalPanel" id="proposalPanel">
+      <button id="yesBtn" type="button">Yes 💖</button>
+
+      <div class="noLane" id="noLane">
+        <button id="noBtn" type="button">No 😅</button>
+      </div>
+    </div>
+
+    <p class="proposalHint" id="proposalHint">Choose wisely 😇</p>
+  </div>
+
+  <!-- SCREEN 6 -->
+  <div class="screen" id="screen6">
+    <h1>Yay! You’re officially my Valentine! ❤️💖</h1>
+    <p>I Love You!🌍❤️</p>
+  </div>
+
+  <!-- Confetti lib -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- App JS -->
+  <script src="script.js"></script>
+</body>
+</html>
