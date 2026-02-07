@@ -421,6 +421,12 @@
       border-radius: 26px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 200;
+
+        /* above dial elements for better clickability */
+        /* also above help card if it overlaps, but that's less likely */
+
     }
 
     #screen3 .playerBtn{
@@ -446,6 +452,8 @@
       flex-direction: column;
       gap: 10px;
       z-index: 50;
+      pointer-events: none;   /* container can't intercept */
+
     }
     #screen3 .volBtn{
       border: 1px solid rgba(255,255,255,0.12);
@@ -458,6 +466,11 @@
       box-shadow: 0 14px 40px rgba(0,0,0,0.35);
       backdrop-filter: blur(10px);
       min-width: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto; /* ✅ can click buttons */  
+
     }
     #screen3 .volWrap{
       border: 1px solid rgba(255,255,255,0.12);
@@ -469,11 +482,16 @@
       display: none;
       align-items: center;
       justify-content: center;
+       pointer-events: auto; /* ✅ can interact with slider when open */
+
     }
-    #screen3 .volWrap.isOpen{ display: flex; }
+    #screen3 .volWrap.isOpen{ display: flex;  pointer-events: auto; }
     #screen3 #volRange{
       width: 140px;
       accent-color: #ff4f81;
+       pointer-events: auto; /* ✅ can click slider */
+       
+
     }
 
     @media (max-height: 740px){
