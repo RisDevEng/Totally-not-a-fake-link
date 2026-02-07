@@ -9,6 +9,9 @@
           requestAnimationFrame(() => {
             s.style.opacity = '1';
             s.style.pointerEvents = 'auto';
+            if (next === "screen2") {
+  preloadMemories(); // fire-and-forget
+}
           });
         } else {
           s.style.opacity = '0';
@@ -46,6 +49,42 @@
       { type: 'img', src: 'images/emojiLove.png', alt: 'emoji' }
     ];
 
+
+    // Preload memory assets to avoid popup lag
+const memoryReady = new Map(); // src -> true/false
+
+function preloadOne(mem) {
+  return new Promise((resolve) => {
+    if (!mem || !mem.src) return resolve(true);
+
+    // Already attempted
+    if (memoryReady.has(mem.src)) return resolve(memoryReady.get(mem.src));
+
+    if (mem.type === "img") {
+      const img = new Image();
+      img.decoding = "async";
+      img.loading = "eager";
+      img.onload = () => { memoryReady.set(mem.src, true); resolve(true); };
+      img.onerror = () => { memoryReady.set(mem.src, false); resolve(false); };
+      img.src = mem.src;
+    } else {
+      const v = document.createElement("video");
+      v.preload = "auto";
+      v.muted = true;
+      v.playsInline = true;
+      v.onloadeddata = () => { memoryReady.set(mem.src, true); resolve(true); };
+      v.onerror = () => { memoryReady.set(mem.src, false); resolve(false); };
+      v.src = mem.src;
+    }
+  });
+}
+
+async function preloadMemories() {
+  // Load all in parallel (fastest overall)
+  await Promise.all(memories.map(preloadOne));
+}
+
+
     let scratches = 0;
     let showingMemory = false;
 
@@ -58,7 +97,7 @@ function showMemoryInVinyl(mem) {
 }
 
 
-    function openMemory() {
+    async function openMemory() {
       if (showingMemory) return;
 
       // after the last memory: go to starfield screen
@@ -69,7 +108,13 @@ function showMemoryInVinyl(mem) {
 
       showingMemory = true;
       vinyl.style.animationPlayState = 'paused';
-      showMemoryInVinyl(memories[scratches]);
+     const mem = memories[scratches];
+
+      // If not ready yet, preload this one before showing
+      await preloadOne(mem);
+
+      showMemoryInVinyl(mem);
+
 
       memoryPopup.style.display = 'block';
       memoryPopup.style.transition = 'opacity 220ms ease, transform 220ms ease';
