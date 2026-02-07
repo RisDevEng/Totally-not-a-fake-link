@@ -41,9 +41,9 @@
     const memoryNextBtn = document.getElementById('memoryNextBtn');
 
     const memories = [
-      { type: 'img', src: 'selfie1.jpg', alt: 'selfie' },
-      { type: 'video', src: 'cuteClip.jpeg' },
-      { type: 'img', src: 'emojiLove.png', alt: 'emoji' }
+      { type: 'img', src: 'images/selfie1.jpg', alt: 'selfie' },
+      { type: 'img', src: 'images/cuteClip.jpeg', alt: 'cute clip' },
+      { type: 'img', src: 'images/emojiLove.png', alt: 'emoji' }
     ];
 
     let scratches = 0;
@@ -165,10 +165,10 @@ function showMemoryInVinyl(mem) {
     const continueHint = document.getElementById("continueHint");
 
     const stations = [
-      { name: "Nkalaa Radio", title: "❤️ You mean so much to me", subtitle: "Tune 1/4", clip: "joke.mp3" },
-      { name: "Nkalaa Radio", title: "🎶 Remember our promise?", subtitle: "Tune 2/4", clip: "confession.mp3" },
-      { name: "Nkalaa Radio", title: "😍 I love you", subtitle: "Tune 3/4", clip: "songSnippet.mp3" },
-      { name: "Nkalaa Radio", title: "💖 You're amazing", subtitle: "Tune 4/4", clip: "loveNote.mp3" }
+      { name: "Nkalaa Radio", title: "❤️ You mean so much to me", subtitle: "Tune 1/4", clip: "songs/joke.mp3" },
+      { name: "Nkalaa Radio", title: "🎶 Remember our promise?", subtitle: "Tune 2/4", clip: "songs/confession.mp3" },
+      { name: "Nkalaa Radio", title: "😍 I love you", subtitle: "Tune 3/4", clip: "songs/songSnippet.mp3" },
+      { name: "Nkalaa Radio", title: "💖 You're amazing", subtitle: "Tune 4/4", clip: "songs/loveNote.mp3" }
     ];
 
     range.min = 0;
